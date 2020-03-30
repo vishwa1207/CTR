@@ -1,28 +1,26 @@
-package com.ctr.qa;
+package Driver;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Properties;
 
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-
-import com.ctr.tests.ExtentReportClass;
-import com.ctr.utils.TestUtils;
-
+import CommonLib.ExtentReportClass;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 
-public class BaseTest extends ExtentReportClass{
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
 
-	static AppiumDriver<MobileElement> driver;
+
+
+public class BaseTest extends ExtentReportClass {
+
+	public static AppiumDriver<MobileElement> driver;
 	protected static Properties props;
 	InputStream inputStream;
 	URL url;
@@ -33,7 +31,7 @@ public class BaseTest extends ExtentReportClass{
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 	
-	@BeforeTest
+	@BeforeMethod
 	public void setup() throws Exception
 	{
 		
@@ -103,71 +101,7 @@ public class BaseTest extends ExtentReportClass{
 			
 		}
 	}
-	
-	public void waitForElementToBeClickable(MobileElement e)
-	{
-		WebDriverWait wait = new WebDriverWait(driver,TestUtils.WAIT);
-		try {
-		wait.until(ExpectedConditions.elementToBeClickable(e));
-		}
-		catch (Exception e1)
-		{
-			e1.printStackTrace();
-		}
-	}
-	
-	public void waitForVisibility(MobileElement e)
-	{
-		WebDriverWait wait = new WebDriverWait(driver,TestUtils.WAIT);
-		try {
-		wait.until(ExpectedConditions.visibilityOf(e));
-		}
-		catch (Exception e1)
-		{
-			e1.printStackTrace();
-		}
-	}
-	
-	public void click(MobileElement e) throws InterruptedException
-	{
-		waitForVisibility(e);
-		waitForElementToBeClickable(e);
-		e.click();
-	}
-	
-	public void sendKeys(MobileElement e, String txt)
-	{
-		waitForVisibility(e);
-		waitForElementToBeClickable(e);
-		e.sendKeys(txt);
-	}
-	
-	public void clear(MobileElement e)
-	{
-		waitForVisibility(e);
-		waitForElementToBeClickable(e);
-		e.clear();
-	}
-	
-	public String getAttribute(MobileElement e,String attribute)
-	{
-		waitForVisibility(e);
-		waitForElementToBeClickable(e);
-		return e.getAttribute(attribute);
-	}
-	
-	public String getText(MobileElement e)
-	{
-		switch(platForm)
-		{
-		case "Android":
-			return getAttribute(e, "text");
-		case "iOS":
-			return getAttribute(e, "label");
-		}
-		return null;
-	}
-	
+
 	@AfterTest
 	public void teardown()
 	{
