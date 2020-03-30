@@ -3,15 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.ctr.tests.AddToCart">
+      <class name="ctr.driver.BaseTest">
         <methods>
+          <include name="feature" invocation-numbers="0"/>
+          <include name="setupClass"/>
           <include name="teardown"/>
-          <include name="beforeMethod"/>
-          <include name="reportSetup"/>
           <include name="setup"/>
-          <include name="addToCartFlow"/>
         </methods>
-      </class> <!-- com.ctr.tests.AddToCart -->
+      </class> <!-- ctr.driver.BaseTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
