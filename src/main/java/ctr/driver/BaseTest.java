@@ -28,7 +28,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 @CucumberOptions (
         features = {"src/test/java/Features"},
         glue = {"ctr.testScripts"},
-        tags = {"@CTR_One"},
+        tags = {"@CTR"},
 //        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:","rerun:target/rerun.txt" },
         monochrome = true, dryRun = false)
 
@@ -115,12 +115,19 @@ public class BaseTest {
 		break;
 		
 		case "iOS":
-			cap.setCapability(MobileCapabilityType.DEVICE_NAME, props.getProperty("iOSAutomationName"));
-			cap.setCapability("bundleId", props.getProperty("iOSBundleId"));
-			String iOSAppLocation= getClass().getResource(props.getProperty("androidAppLocation")).getFile();
-			cap.setCapability(MobileCapabilityType.APP, iOSAppLocation);
-			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
+			/*cap.setCapability(MobileCapabilityType.DEVICE_NAME, props.getProperty("deviceName"));
+			cap.setCapability("platFormVersion", props.getProperty("platformVersion"));
+			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, props.getProperty("automationName"));
+			cap.setCapability(MobileCapabilityType.APP, props.getProperty("app"));
+			//cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");*/
 
+
+			cap.setCapability("platformVersion",props.getProperty("platformVersion"));
+			cap.setCapability("deviceName",props.getProperty("deviceName"));
+			cap.setCapability("automationName",props.getProperty("automationName"));
+			cap.setCapability("app",props.getProperty("app"));
+			cap.setCapability("udid",props.getProperty("udid"));
+			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
 			url = new URL(props.getProperty("appiumURL"));
 			driver = new IOSDriver<MobileElement>(url, cap);
 			break;

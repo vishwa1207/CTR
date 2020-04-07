@@ -12,17 +12,19 @@ public class AddToCart extends ExtentReportClass{
 	AddToCartPage addToCartPage = new AddToCartPage();
 	CommonMethods c = new CommonMethods();
 
-	
+	//AddToCart a=new AddToCart();
+
 	@Given("^I click on 'Allow' button$")
 	public void i_click_on_Allow_button() throws Throwable {
 		System.out.println("inside first feature ");
+		//logger = extent.createTest("afa","ssdc");
 		Thread.sleep(7000);
-		c.click(addToCartPage.getAllowAlwaysButton());
+		c.click(addToCartPage.getAllowForNotification());
 		System.out.println("clicked on Allow");
 	
 	}
 	
-	
+
 	@When("^I Click on 'shop' button$")
 	public void i_Click_on_shop_button() throws Throwable {
 		Thread.sleep(15000);
@@ -42,6 +44,5 @@ public class AddToCart extends ExtentReportClass{
 	public void i_enter_password() throws Throwable {
 	}
 
-	
 
 }
