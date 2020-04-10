@@ -2,18 +2,14 @@
 Feature: Verify CTR app
 
 Background:
-    Given I click on 'Allow' button
-    
+    Given I click on 'Allow' button for location and Notification
 
-@CTR_SignIn
+@CTR_AddToCart
 Scenario: Verify 'CTR page' fields and functionality
-   When I click on 'SignIn' button
-   Then I enter 'UserName'
-   And I enter 'password'
-   And Click on 'Login' now
-   Then Go to 'Account' Page
-   Then Click on 'SignOut'
-   And  Finish the test
+   When I click on 'NEXT' button to reach HomePage
+   Then I Click on 'shop' button
+   And  Add an Item to Cart
+
 
    
 #    When I Click on 'shop' button

@@ -4,6 +4,7 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,7 +43,12 @@ public class CommonMethods extends BaseTest{
 			e1.printStackTrace();
 		}
 	}
-	
+
+	public void waitByXpath(String name) {
+		WebDriverWait obj = new WebDriverWait(driver, 60);
+		obj.until(ExpectedConditions.presenceOfElementLocated(By.xpath(name)));
+
+	}
 	public void click(MobileElement e) throws InterruptedException
 	{
 		waitForVisibility(e);

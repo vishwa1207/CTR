@@ -30,6 +30,12 @@ import io.appium.java_client.remote.MobileCapabilityType;
         glue = {"ctr.testScripts"},
         tags = {"@CTR"},
 //        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:","rerun:target/rerun.txt" },
+		plugin = {
+				"pretty",
+				"html:target/cucumber-reports/cucumber-pretty",
+				"json:target/cucumber-reports/CucumberTestReport.json",
+				"rerun:target/cucumber-reports/rerun.txt"
+		},
         monochrome = true, dryRun = false)
 
 
