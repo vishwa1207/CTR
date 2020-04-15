@@ -4,14 +4,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
+import ctr.commonLib.ReportingUtil;
+import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import ctr.commonLib.ExtentReportClass;
 import cucumber.api.CucumberOptions;
@@ -24,23 +23,21 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 
-
+@RunWith(Cucumber.class)
 @CucumberOptions (
         features = {"src/test/java/Features"},
         glue = {"ctr.testScripts"},
         tags = {"@CTR"},
-//        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:","rerun:target/rerun.txt" },
 		plugin = {
 				"pretty",
-				"html:target/cucumber-reports/cucumber-pretty",
-				"json:target/cucumber-reports/CucumberTestReport.json",
-				"rerun:target/cucumber-reports/rerun.txt"
+				"html:target/site/cucumber-pretty",
+				"json:target/cucumber.json",
 		},
-        monochrome = true, dryRun = false)
+        monochrome = true)
 
 
-@Test
-public class BaseTest {
+
+public class BaseTest extends AbstractTestNGCucumberTests {
 	
 	private TestNGCucumberRunner testRunner;
 	protected static AppiumDriver<MobileElement> driver;
@@ -54,28 +51,13 @@ public class BaseTest {
 	{
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
-	
-	
-	@DataProvider(name="features")
-    public Object[][] getFeatures()    {
-        System.out.println("While getting features");
-        return testRunner.provideFeatures();
-    }
-	
-	
-	@Test(groups = "cucumber", description="Runs Cucumber Feature", dataProvider="features")
-	public void feature(CucumberFeatureWrapper cucumberFeature)    {
-	    testRunner.runCucumber(cucumberFeature.getCucumberFeature());
+
+	@AfterSuite
+	public void generateReport(){
+
+		ReportingUtil.generateJVMreport();
 	}
-	
-	
-	@BeforeClass
-    public void setupClass()    {   
-        testRunner = new TestNGCucumberRunner(this.getClass());       
-    }
-	
-	
-	@BeforeMethod
+	@BeforeTest
 	public void setup() throws Exception
 	{
 		
@@ -154,7 +136,7 @@ public class BaseTest {
 		}
 	}
 	
-	
+
 	@AfterTest
 	public void teardown()
 	{

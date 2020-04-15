@@ -12,6 +12,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import ctr.driver.BaseTest;
+import org.testng.annotations.BeforeSuite;
 
 public class ExtentReportClass extends BaseTest {
 
@@ -24,7 +25,7 @@ public class ExtentReportClass extends BaseTest {
 	protected static String userName = System.getProperty("user.name");
 	protected static String osVersion = System.getProperty("os.version");
 	
-	@BeforeMethod
+	@BeforeSuite
 	public void reportSetup()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
